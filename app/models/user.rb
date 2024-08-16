@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :prototypes
   has_many :comments, dependent: :destroy
 
+  validates :email, presence: true, uniqueness: true, format: { with: /\A[^@\s]+@[^@\s]+\z/ }
+  validates :password, presence: true, length: { minimum: 6 }, confirmation: true
   validates :name, presence: true
   validates :profile, presence: true
   validates :occupation, presence: true
